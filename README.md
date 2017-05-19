@@ -1,5 +1,7 @@
 # web-audio-beat-detector-worker
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/chrisguttandin/web-audio-beat-detector-worker.svg)](https://greenkeeper.io/)
+
 **The worker which is used by the web-audio-beat-detector package.**
 
 [![tests](https://img.shields.io/travis/chrisguttandin/web-audio-beat-detector-worker/master.svg?style=flat-square)](https://travis-ci.org/chrisguttandin/web-audio-beat-detector-worker)
