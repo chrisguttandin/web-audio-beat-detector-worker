@@ -22,8 +22,8 @@ export const countIntervalsBetweenNearbyPeaks = (peaks: number[]) => {
 
                 if (!foundInterval) {
                     intervalBuckets.push({
-                        peaks: [ peak ],
-                        interval
+                        interval,
+                        peaks: [ peak ]
                     });
                 }
             }
