@@ -27,7 +27,6 @@ export const loadFixtureAsPreparedAudioBuffer = (fixture, callback) => {
             .decodeAudioData(arrayBuffer)
             .then((audioBuffer) => {
                 const offlineAudioContext = new OfflineAudioContext(audioBuffer.numberOfChannels, audioBuffer.length, audioBuffer.sampleRate);
-
                 const biquadFilter = offlineAudioContext.createBiquadFilter();
                 const bufferSourceNode = offlineAudioContext.createBufferSource();
 
