@@ -4,6 +4,8 @@ module.exports = (config) => {
 
         basePath: '../../',
 
+        browserNoActivityTimeout: 20000,
+
         client: {
             mochaWebWorker: {
                 evaluate: {
@@ -85,8 +87,6 @@ module.exports = (config) => {
     if (process.env.TRAVIS) {
 
         config.set({
-
-            browserNoActivityTimeout: 20000,
 
             browsers: [
                 'ChromeSauceLabs',

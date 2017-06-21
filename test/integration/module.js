@@ -18,7 +18,9 @@ describe('module', () => {
         let channelData;
         let sampleRate;
 
-        beforeEach((done) => {
+        beforeEach(function (done) {
+            this.timeout(4000);
+
             loadFixtureAsPreparedAudioBuffer(filename, (err, audioBuffer) => {
                 expect(err).to.be.null;
 
@@ -61,7 +63,9 @@ describe('module', () => {
         let channelData;
         let sampleRate;
 
-        beforeEach((done) => {
+        beforeEach(function (done) {
+            this.timeout(4000);
+
             loadFixtureAsPreparedAudioBuffer(filename, (err, audioBuffer) => {
                 expect(err).to.be.null;
 
