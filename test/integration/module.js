@@ -13,7 +13,7 @@ describe('module', () => {
         worker = new Worker('base/src/module.ts');
     });
 
-    leche.withData(tempoData, (filename, tempo) => { // eslint-disable-line no-undef
+    leche.withData(tempoData, (filename, tempo) => {
 
         let channelData;
         let sampleRate;
@@ -58,7 +58,7 @@ describe('module', () => {
 
     });
 
-    leche.withData(bpmOffsetData, (filename, bpm, offset) => { // eslint-disable-line no-undef
+    leche.withData(bpmOffsetData, (filename, bpm, offset) => {
 
         let channelData;
         let sampleRate;
