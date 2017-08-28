@@ -63,5 +63,8 @@
     "test": "grunt lint && grunt test"
   },
   "types": "build/es2015/module.d.ts",
-  "version": "2.0.0"
+  "version": "2.0.0",
+  "dependencies": {
+    "babel-plugin-external-helpers": "^6.22.0"
+  }
 }
