@@ -39,6 +39,7 @@
     "standardized-audio-context": "^9.3.0",
     "ts-loader": "^2.3.4",
     "tsconfig-holy-grail": "^2.2.24",
+    "tslint": "^5.7.0",
     "tslint-config-holy-grail": "^11.0.0",
     "typescript": "^2.4.2",
     "webpack": "^3.5.5"
@@ -65,7 +66,5 @@
   },
   "types": "build/es2015/module.d.ts",
   "version": "2.0.0",
-  "dependencies": {
-    "tslint": "^5.7.0"
-  }
+  "dependencies": {}
 }
