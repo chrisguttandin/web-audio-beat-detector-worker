@@ -4,14 +4,19 @@ export default {
     input: 'build/es2015/module.js',
     output: {
         file: 'build/es5/bundle.js',
-        format: 'iife',
+        format: 'umd',
         name: 'webAudioBeatDetectorWorker'
     },
     plugins: [
         babel({
             exclude: 'node_modules/**',
             plugins: [
-                'external-helpers'
+                'external-helpers',
+                [
+                    'transform-runtime', {
+                        polyfill: false
+                    }
+                ]
             ],
             presets: [
                 [
@@ -20,7 +25,8 @@ export default {
                         modules: false
                     }
                 ]
-            ]
+            ],
+            runtimeHelpers: true
         })
     ]
 };
