@@ -1,5 +1,5 @@
 import { ITempoBucket } from '../interfaces';
-import { countIntervalsBetweenNearbyPeaks } from './count-intervals-between-nearby-peaks';
+import { countIntervalsBetweenNearbyPeaks } from './count-intervals-between-nearby-peaks';
 import { getPeaksAtThreshold } from './get-peaks-at-threshold';
 import { groupNeighborsByTempo } from './group-neighbors-by-tempo';
 

@@ -1,4 +1,4 @@
-import { IIntervalBucket } from '../interfaces';
+import { IIntervalBucket } from '../interfaces';
 
 export const countIntervalsBetweenNearbyPeaks = (peaks: number[]) => {
     const intervalBuckets: IIntervalBucket[] = [];

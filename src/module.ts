@@ -20,7 +20,7 @@ addEventListener('message', ({ data }: IBrokerEvent) => {
         } else if (data.method === 'guess') {
             const { id, params: { channelData, sampleRate } } = data;
 
-            const { bpm, offset } = guess(channelData, sampleRate);
+            const { bpm, offset } = guess(channelData, sampleRate);
 
             postMessage(<IGuessResponse> {
                 error: null,
