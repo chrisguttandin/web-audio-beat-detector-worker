@@ -1,9 +1,9 @@
-import { computeTempoBuckets } from './compute-tempo-buckets';
+import { computeTempoBuckets } from './compute-tempo-buckets';
 
 export const guess = (channelData: Float32Array, sampleRate: number) => {
     const tempoBuckets = computeTempoBuckets(channelData, sampleRate);
 
-    const { peaks, tempo } = tempoBuckets[0];
+    const { peaks, tempo } = tempoBuckets[0];
     const bpm = Math.round(tempo);
     const secondsPerBeat = 60 / bpm;
 
