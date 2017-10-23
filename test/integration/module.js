@@ -15,6 +15,12 @@ describe('module', () => {
 
     describe('analyze', () => {
 
+        let method;
+
+        beforeEach(() => {
+            method = 'analyze';
+        });
+
         leche.withData(tempoData, (filename, tempo) => {
 
             let channelData;
@@ -48,7 +54,54 @@ describe('module', () => {
 
                 worker.postMessage({
                     id,
-                    method: 'analyze',
+                    method,
+                    params: {
+                        channelData,
+                        sampleRate
+                    }
+                }, [
+                    channelData.buffer
+                ]);
+            });
+
+        });
+
+        describe('with a file without detectable beats', () => {
+
+            let channelData;
+            let sampleRate;
+
+            beforeEach(function (done) {
+                this.timeout(4000);
+
+                loadFixtureAsPreparedAudioBuffer('tombo-piano.wav', (err, audioBuffer) => {
+                    expect(err).to.be.null;
+
+                    channelData = audioBuffer.getChannelData(0);
+                    sampleRate = audioBuffer.sampleRate;
+
+                    done();
+                });
+            });
+
+            it('should return an error', function (done) {
+                this.timeout(5000);
+
+                worker.addEventListener('message', ({ data }) => {
+                    expect(data).to.deep.equal({
+                        error: {
+                            message: 'The given channelData does not contain any detectable beats.'
+                        },
+                        id,
+                        result: null
+                    });
+
+                    done();
+                });
+
+                worker.postMessage({
+                    id,
+                    method,
                     params: {
                         channelData,
                         sampleRate
@@ -63,6 +116,12 @@ describe('module', () => {
     });
 
     describe('guess', () => {
+
+        let method;
+
+        beforeEach(() => {
+            method = 'guess';
+        });
 
         leche.withData(bpmOffsetData, (filename, bpm, offset) => {
 
@@ -97,7 +156,54 @@ describe('module', () => {
 
                 worker.postMessage({
                     id,
-                    method: 'guess',
+                    method,
+                    params: {
+                        channelData,
+                        sampleRate
+                    }
+                }, [
+                    channelData.buffer
+                ]);
+            });
+
+        });
+
+        describe('with a file without detectable beats', () => {
+
+            let channelData;
+            let sampleRate;
+
+            beforeEach(function (done) {
+                this.timeout(4000);
+
+                loadFixtureAsPreparedAudioBuffer('tombo-piano.wav', (err, audioBuffer) => {
+                    expect(err).to.be.null;
+
+                    channelData = audioBuffer.getChannelData(0);
+                    sampleRate = audioBuffer.sampleRate;
+
+                    done();
+                });
+            });
+
+            it('should return an error', function (done) {
+                this.timeout(5000);
+
+                worker.addEventListener('message', ({ data }) => {
+                    expect(data).to.deep.equal({
+                        error: {
+                            message: 'The given channelData does not contain any detectable beats.'
+                        },
+                        id,
+                        result: null
+                    });
+
+                    done();
+                });
+
+                worker.postMessage({
+                    id,
+                    method,
                     params: {
                         channelData,
                         sampleRate
