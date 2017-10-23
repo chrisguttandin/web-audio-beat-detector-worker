@@ -13,92 +13,100 @@ describe('module', () => {
         worker = new Worker('base/src/module.ts');
     });
 
-    leche.withData(tempoData, (filename, tempo) => {
+    describe('analyze', () => {
 
-        let channelData;
-        let sampleRate;
+        leche.withData(tempoData, (filename, tempo) => {
 
-        beforeEach(function (done) {
-            this.timeout(4000);
+            let channelData;
+            let sampleRate;
 
-            loadFixtureAsPreparedAudioBuffer(filename, (err, audioBuffer) => {
-                expect(err).to.be.null;
+            beforeEach(function (done) {
+                this.timeout(4000);
 
-                channelData = audioBuffer.getChannelData(0);
-                sampleRate = audioBuffer.sampleRate;
+                loadFixtureAsPreparedAudioBuffer(filename, (err, audioBuffer) => {
+                    expect(err).to.be.null;
 
-                done();
+                    channelData = audioBuffer.getChannelData(0);
+                    sampleRate = audioBuffer.sampleRate;
+
+                    done();
+                });
             });
-        });
 
-        it('should analyze the tempo from the given channelData', function (done) {
-            this.timeout(5000);
+            it('should analyze the tempo from the given channelData', function (done) {
+                this.timeout(5000);
 
-            worker.addEventListener('message', ({ data }) => {
-                expect(data).to.deep.equal({
-                    error: null,
-                    id,
-                    result: { tempo }
+                worker.addEventListener('message', ({ data }) => {
+                    expect(data).to.deep.equal({
+                        error: null,
+                        id,
+                        result: { tempo }
+                    });
+
+                    done();
                 });
 
-                done();
+                worker.postMessage({
+                    id,
+                    method: 'analyze',
+                    params: {
+                        channelData,
+                        sampleRate
+                    }
+                }, [
+                    channelData.buffer
+                ]);
             });
 
-            worker.postMessage({
-                id,
-                method: 'analyze',
-                params: {
-                    channelData,
-                    sampleRate
-                }
-            }, [
-                channelData.buffer
-            ]);
         });
 
     });
 
-    leche.withData(bpmOffsetData, (filename, bpm, offset) => {
+    describe('guess', () => {
 
-        let channelData;
-        let sampleRate;
+        leche.withData(bpmOffsetData, (filename, bpm, offset) => {
 
-        beforeEach(function (done) {
-            this.timeout(4000);
+            let channelData;
+            let sampleRate;
 
-            loadFixtureAsPreparedAudioBuffer(filename, (err, audioBuffer) => {
-                expect(err).to.be.null;
+            beforeEach(function (done) {
+                this.timeout(4000);
 
-                channelData = audioBuffer.getChannelData(0);
-                sampleRate = audioBuffer.sampleRate;
+                loadFixtureAsPreparedAudioBuffer(filename, (err, audioBuffer) => {
+                    expect(err).to.be.null;
 
-                done();
+                    channelData = audioBuffer.getChannelData(0);
+                    sampleRate = audioBuffer.sampleRate;
+
+                    done();
+                });
             });
-        });
 
-        it('should guess the bpm and the offset from the given channelData', function (done) {
-            this.timeout(5000);
+            it('should guess the bpm and the offset from the given channelData', function (done) {
+                this.timeout(5000);
 
-            worker.addEventListener('message', ({ data }) => {
-                expect(data).to.deep.equal({
-                    error: null,
-                    id,
-                    result: { bpm, offset }
+                worker.addEventListener('message', ({ data }) => {
+                    expect(data).to.deep.equal({
+                        error: null,
+                        id,
+                        result: { bpm, offset }
+                    });
+
+                    done();
                 });
 
-                done();
+                worker.postMessage({
+                    id,
+                    method: 'guess',
+                    params: {
+                        channelData,
+                        sampleRate
+                    }
+                }, [
+                    channelData.buffer
+                ]);
             });
 
-            worker.postMessage({
-                id,
-                method: 'guess',
-                params: {
-                    channelData,
-                    sampleRate
-                }
-            }, [
-                channelData.buffer
-            ]);
         });
 
     });
