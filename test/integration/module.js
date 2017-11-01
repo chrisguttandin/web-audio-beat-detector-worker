@@ -27,7 +27,7 @@ describe('module', () => {
             let sampleRate;
 
             beforeEach(function (done) {
-                this.timeout(4000);
+                this.timeout(5000);
 
                 loadFixtureAsPreparedAudioBuffer(filename, (err, audioBuffer) => {
                     expect(err).to.be.null;
@@ -72,7 +72,7 @@ describe('module', () => {
             let sampleRate;
 
             beforeEach(function (done) {
-                this.timeout(4000);
+                this.timeout(5000);
 
                 loadFixtureAsPreparedAudioBuffer('tombo-piano.wav', (err, audioBuffer) => {
                     expect(err).to.be.null;
@@ -129,7 +129,7 @@ describe('module', () => {
             let sampleRate;
 
             beforeEach(function (done) {
-                this.timeout(4000);
+                this.timeout(5000);
 
                 loadFixtureAsPreparedAudioBuffer(filename, (err, audioBuffer) => {
                     expect(err).to.be.null;
@@ -174,7 +174,7 @@ describe('module', () => {
             let sampleRate;
 
             beforeEach(function (done) {
-                this.timeout(4000);
+                this.timeout(5000);
 
                 loadFixtureAsPreparedAudioBuffer('tombo-piano.wav', (err, audioBuffer) => {
                     expect(err).to.be.null;
