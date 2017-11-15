@@ -2,7 +2,7 @@ const { resolve } = require('path');
 const { optimize: { UglifyJsPlugin } } = require('webpack');
 
 module.exports = {
-    deault: {
+    default: {
         entry: {
             worker: './build/es2015/module.js'
         },
