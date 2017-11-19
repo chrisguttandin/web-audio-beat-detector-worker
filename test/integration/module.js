@@ -27,7 +27,7 @@ describe('module', () => {
             let sampleRate;
 
             beforeEach(function (done) {
-                this.timeout(6000);
+                this.timeout(30000);
 
                 loadFixtureAsPreparedAudioBuffer(filename, (err, audioBuffer) => {
                     expect(err).to.be.null;
@@ -40,7 +40,7 @@ describe('module', () => {
             });
 
             it('should analyze the tempo from the given channelData', function (done) {
-                this.timeout(6000);
+                this.timeout(30000);
 
                 worker.addEventListener('message', ({ data }) => {
                     expect(data).to.deep.equal({
@@ -72,7 +72,7 @@ describe('module', () => {
             let sampleRate;
 
             beforeEach(function (done) {
-                this.timeout(6000);
+                this.timeout(30000);
 
                 loadFixtureAsPreparedAudioBuffer('tombo-piano.wav', (err, audioBuffer) => {
                     expect(err).to.be.null;
@@ -85,7 +85,7 @@ describe('module', () => {
             });
 
             it('should return an error', function (done) {
-                this.timeout(6000);
+                this.timeout(30000);
 
                 worker.addEventListener('message', ({ data }) => {
                     expect(data).to.deep.equal({
@@ -129,7 +129,7 @@ describe('module', () => {
             let sampleRate;
 
             beforeEach(function (done) {
-                this.timeout(6000);
+                this.timeout(30000);
 
                 loadFixtureAsPreparedAudioBuffer(filename, (err, audioBuffer) => {
                     expect(err).to.be.null;
@@ -142,7 +142,7 @@ describe('module', () => {
             });
 
             it('should guess the bpm and the offset from the given channelData', function (done) {
-                this.timeout(6000);
+                this.timeout(30000);
 
                 worker.addEventListener('message', ({ data }) => {
                     expect(data).to.deep.equal({
@@ -174,7 +174,7 @@ describe('module', () => {
             let sampleRate;
 
             beforeEach(function (done) {
-                this.timeout(6000);
+                this.timeout(30000);
 
                 loadFixtureAsPreparedAudioBuffer('tombo-piano.wav', (err, audioBuffer) => {
                     expect(err).to.be.null;
@@ -187,7 +187,7 @@ describe('module', () => {
             });
 
             it('should return an error', function (done) {
-                this.timeout(6000);
+                this.timeout(30000);
 
                 worker.addEventListener('message', ({ data }) => {
                     expect(data).to.deep.equal({
