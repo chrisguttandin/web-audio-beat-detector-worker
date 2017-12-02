@@ -1,6 +1,6 @@
-import { IAnalyzeResponse, IBrokerEvent, IErrorResponse, IGuessResponse } from './interfaces';
 import { analyze } from './helpers/analyze';
 import { guess } from './helpers/guess';
+import { IAnalyzeResponse, IBrokerEvent, IErrorResponse, IGuessResponse } from './interfaces';
 
 export * from './interfaces';
 export * from './types';
