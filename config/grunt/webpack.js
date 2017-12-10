@@ -13,6 +13,14 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
+                        plugins: [
+                            'external-helpers',
+                            [
+                                'transform-runtime', {
+                                    polyfill: false
+                                }
+                            ]
+                        ],
                         presets: [
                             [
                                 'es2015',
