@@ -16,19 +16,30 @@ export const groupNeighborsByTempo = (intervalBuckets: IIntervalBucket[], sample
                 theoreticalTempo /= 2;
             }
 
-            const foundTempo = tempoBuckets.some((tempoCount) => {
-                if (tempoCount.tempo === theoreticalTempo) {
-                    tempoCount.peaks = [ ...tempoCount.peaks, ...intervalBucket.peaks ];
+            let foundTempo = false;
+            let score = intervalBucket.peaks.length;
 
-                    return true;
-                }
+            tempoBuckets
+                .forEach((tempoBucket) => {
+                    if (tempoBucket.tempo === theoreticalTempo) {
+                        tempoBucket.score += intervalBucket.peaks.length;
+                        tempoBucket.peaks = [ ...tempoBucket.peaks, ...intervalBucket.peaks ];
 
-                return false;
-            });
+                        foundTempo = true;
+                    }
+
+                    if (tempoBucket.tempo > theoreticalTempo - 0.5 && tempoBucket.tempo < theoreticalTempo + 0.5) {
+                        const tempoDifference = Math.abs(tempoBucket.tempo - theoreticalTempo) * 2;
+
+                        score += (1 - tempoDifference) * tempoBucket.peaks.length;
+                        tempoBucket.score += (1 - tempoDifference) * intervalBucket.peaks.length;
+                    }
+                });
 
             if (!foundTempo) {
                 tempoBuckets.push({
                     peaks: intervalBucket.peaks,
+                    score,
                     tempo: theoreticalTempo
                 });
             }

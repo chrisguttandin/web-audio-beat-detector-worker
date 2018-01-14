@@ -19,7 +19,7 @@ export const computeTempoBuckets = (channelData: Float32Array, sampleRate: numbe
     const intervalBuckets = countIntervalsBetweenNearbyPeaks(peaks);
     const tempoBuckets = groupNeighborsByTempo(intervalBuckets, sampleRate);
 
-    tempoBuckets.sort((a, b) => b.peaks.length - a.peaks.length);
+    tempoBuckets.sort((a, b) => b.score - a.score);
 
     return tempoBuckets;
 };
