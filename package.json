@@ -41,7 +41,7 @@
     "mocha": "^5.0.0",
     "rollup": "^0.55.1",
     "rollup-plugin-babel": "^3.0.3",
-    "sinon": "^4.2.1",
+    "sinon": "^4.2.2",
     "sinon-chai": "^2.14.0",
     "standardized-audio-context": "^11.1.3",
     "ts-loader": "^3.3.1",
