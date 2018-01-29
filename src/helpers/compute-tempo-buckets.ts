@@ -1,19 +1,21 @@
 import { ITempoBucket } from '../interfaces';
 import { countIntervalsBetweenNearbyPeaks } from './count-intervals-between-nearby-peaks';
+import { getMaximumValue } from './get-maximum-value';
 import { getPeaksAtThreshold } from './get-peaks-at-threshold';
 import { groupNeighborsByTempo } from './group-neighbors-by-tempo';
 
-const INITIAL_THRESHOLD = 0.9;
 const MINUMUM_NUMBER_OF_PEAKS = 30;
-const MINIMUM_THRESHOLD = 0.3;
 
 export const computeTempoBuckets = (channelData: Float32Array, sampleRate: number): ITempoBucket[] => {
-    let peaks: number[] = [];
-    let threshold = INITIAL_THRESHOLD;
+    const maximumValue = getMaximumValue(channelData);
+    const minimumThreshold = maximumValue * 0.3;
 
-    while (peaks.length < MINUMUM_NUMBER_OF_PEAKS && threshold >= MINIMUM_THRESHOLD) {
+    let peaks: number[] = [];
+    let threshold = maximumValue - (maximumValue * 0.05);
+
+    while (peaks.length < MINUMUM_NUMBER_OF_PEAKS && threshold >= minimumThreshold) {
         peaks = getPeaksAtThreshold(channelData, threshold, sampleRate);
-        threshold -= 0.05;
+        threshold -= maximumValue * 0.05;
     }
 
     const intervalBuckets = countIntervalsBetweenNearbyPeaks(peaks);
