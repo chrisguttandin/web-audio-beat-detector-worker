@@ -30,7 +30,7 @@ export const loadFixtureAsPreparedAudioBuffer = (fixture, callback) => {
                 const biquadFilter = offlineAudioContext.createBiquadFilter();
                 const bufferSourceNode = offlineAudioContext.createBufferSource();
 
-                biquadFilter.frequency.value = 200;
+                biquadFilter.frequency.value = 240;
                 biquadFilter.type = 'lowpass';
 
                 bufferSourceNode.buffer = audioBuffer;
