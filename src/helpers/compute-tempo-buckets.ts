@@ -13,9 +13,11 @@ export const computeTempoBuckets = (channelData: Float32Array, sampleRate: numbe
     let peaks: number[] = [];
     let threshold = maximumValue - (maximumValue * 0.05);
 
-    while (peaks.length < MINUMUM_NUMBER_OF_PEAKS && threshold >= minimumThreshold) {
-        peaks = getPeaksAtThreshold(channelData, threshold, sampleRate);
-        threshold -= maximumValue * 0.05;
+    if (maximumValue > 0.25) {
+        while (peaks.length < MINUMUM_NUMBER_OF_PEAKS && threshold >= minimumThreshold) {
+            peaks = getPeaksAtThreshold(channelData, threshold, sampleRate);
+            threshold -= maximumValue * 0.05;
+        }
     }
 
     const intervalBuckets = countIntervalsBetweenNearbyPeaks(peaks);
