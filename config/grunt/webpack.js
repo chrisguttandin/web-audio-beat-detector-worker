@@ -1,11 +1,11 @@
 const { resolve } = require('path');
-const { optimize: { UglifyJsPlugin } } = require('webpack');
 
 module.exports = {
     default: {
         entry: {
             worker: './build/es2015/module.js'
         },
+        mode: 'production',
         module: {
             rules: [ {
                 exclude: /node_modules/,
@@ -37,13 +37,6 @@ module.exports = {
             filename: '[name].min.js',
             path: resolve('build/es5')
         },
-        plugins: [
-            new UglifyJsPlugin({
-                output: {
-                    comments: false
-                }
-            })
-        ],
         target: 'webworker'
     }
 };
