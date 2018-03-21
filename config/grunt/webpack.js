@@ -32,7 +32,10 @@ module.exports = {
                                         'last 2 Opera versions',
                                         'last 2 Safari versions'
                                     ]
-                                }
+                                },
+                                whitelist: [
+                                    'transform-es2015-template-literals'
+                                ]
                             } ]
                         ]
                     }
