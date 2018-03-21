@@ -1,4 +1,5 @@
 const { resolve } = require('path');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
     default: {
@@ -32,6 +33,17 @@ module.exports = {
                     }
                 }
             } ]
+        },
+        optimization: {
+            minimizer: [
+                new UglifyJsPlugin({
+                    extractComments: {
+                        banner: false,
+                        condition: /^\**!|@preserve|@license|@cc_on/,
+                        filename: '3rdpartylicenses.txt'
+                    }
+                })
+            ]
         },
         output: {
             filename: '[name].min.js',
