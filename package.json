@@ -59,7 +59,7 @@
     "tslint": "^5.9.1",
     "tslint-config-holy-grail": "^24.0.4",
     "typescript": "^2.8.1",
-    "uglifyjs-webpack-plugin": "^1.2.4",
+    "uglifyjs-webpack-plugin": "^1.2.5",
     "webpack": "^4.6.0"
   },
   "files": [
