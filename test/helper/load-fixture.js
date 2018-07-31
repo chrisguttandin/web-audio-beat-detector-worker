@@ -17,18 +17,18 @@ export const loadFixtureAsPreparedAudioBuffer = (fixture, callback) => {
     request.onerror = () => callback('request-failed');
     request.onload = (event) => {
         const arrayBuffer = event.target.response;
-        const offlineAudioContext = new OfflineAudioContext(1, 1, 44100);
+        const decodingOfflineAudioContext = new OfflineAudioContext(1, 1, 44100);
 
         if (fixture.slice(-4) === '.txt') {
             arrayBuffer = base64ToArrayBuffer(arrayBuffer);
         }
 
-        offlineAudioContext
+        decodingOfflineAudioContext
             .decodeAudioData(arrayBuffer)
             .then((audioBuffer) => {
-                const offlineAudioContext = new OfflineAudioContext(audioBuffer.numberOfChannels, audioBuffer.length, audioBuffer.sampleRate);
-                const biquadFilter = offlineAudioContext.createBiquadFilter();
-                const bufferSourceNode = offlineAudioContext.createBufferSource();
+                const filteringOfflineAudioContext = new OfflineAudioContext(audioBuffer.numberOfChannels, audioBuffer.length, audioBuffer.sampleRate);
+                const biquadFilter = filteringOfflineAudioContext.createBiquadFilter();
+                const bufferSourceNode = filteringOfflineAudioContext.createBufferSource();
 
                 biquadFilter.frequency.value = 240;
                 biquadFilter.type = 'lowpass';
@@ -37,11 +37,11 @@ export const loadFixtureAsPreparedAudioBuffer = (fixture, callback) => {
 
                 bufferSourceNode
                     .connect(biquadFilter)
-                    .connect(offlineAudioContext.destination);
+                    .connect(filteringOfflineAudioContext.destination);
 
                 bufferSourceNode.start(0);
 
-                return offlineAudioContext.startRendering();
+                return filteringOfflineAudioContext.startRendering();
             })
             .then((audioBuffer) => callback(null, audioBuffer))
             .catch((err) => callback(err));
