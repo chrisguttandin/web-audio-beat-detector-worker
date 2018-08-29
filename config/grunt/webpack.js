@@ -15,15 +15,14 @@ module.exports = {
                     loader: 'babel-loader',
                     options: {
                         plugins: [
-                            'external-helpers',
-                            [
-                                'transform-runtime', {
-                                    polyfill: false
-                                }
-                            ]
+                            '@babel/plugin-external-helpers',
+                            '@babel/plugin-transform-runtime'
                         ],
                         presets: [
-                            [ 'env', {
+                            [ '@babel/preset-env', {
+                                include: [
+                                    'transform-template-literals'
+                                ],
                                 targets: {
                                     browsers: [
                                         'last 2 Chrome versions',
@@ -35,10 +34,7 @@ module.exports = {
                                         'last 2 Opera versions',
                                         'last 2 Safari versions'
                                     ]
-                                },
-                                whitelist: [
-                                    'transform-es2015-template-literals'
-                                ]
+                                }
                             } ]
                         ]
                     }
