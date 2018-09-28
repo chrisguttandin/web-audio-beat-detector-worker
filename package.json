@@ -67,6 +67,12 @@
     "src/"
   ],
   "homepage": "https://github.com/chrisguttandin/web-audio-beat-detector-worker",
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint --edit --extends @commitlint/config-angular",
+      "pre-commit": "grunt lint"
+    }
+  },
   "license": "MIT",
   "main": "build/es5/bundle.js",
   "module": "build/esm/module.js",
@@ -76,8 +82,6 @@
     "url": "https://github.com/chrisguttandin/web-audio-beat-detector-worker.git"
   },
   "scripts": {
-    "commitmsg": "commitlint --edit --extends @commitlint/config-angular",
-    "precommit": "grunt lint",
     "prepublishOnly": "grunt build",
     "test": "grunt lint && grunt test"
   },
