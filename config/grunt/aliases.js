@@ -2,8 +2,7 @@ module.exports = {
     build: [
         'clean:build',
         'sh:build-es2018',
-        'sh:build-es5',
-        'webpack'
+        'sh:build-es5'
     ],
     continuous: [
         // @todo This is broken now.
