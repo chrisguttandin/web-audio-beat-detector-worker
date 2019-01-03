@@ -68,6 +68,8 @@ module.exports = (config) => {
             'test/unit/**/*.js': 'webpack'
         },
 
+        singleRun: true,
+
         webpack: {
             mode: 'development',
             module: {
