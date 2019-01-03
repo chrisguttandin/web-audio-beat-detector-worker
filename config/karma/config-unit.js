@@ -47,12 +47,7 @@ module.exports = (config) => {
                 served: true,
                 watched: true
             },
-            {
-                included: false,
-                pattern: 'test/unit/**/*.js',
-                served: true,
-                watched: true
-            }
+            'test/unit/**/*.js'
         ],
 
         frameworks: [
