@@ -4,6 +4,8 @@ module.exports = (config) => {
 
     config.set({
 
+        autoWatch: false,
+
         basePath: '../../',
 
         browserNoActivityTimeout: 50000,
