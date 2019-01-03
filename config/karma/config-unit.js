@@ -4,8 +4,6 @@ module.exports = (config) => {
 
     config.set({
 
-        autoWatch: false,
-
         basePath: '../../',
 
         browserNoActivityTimeout: 50000,
@@ -67,8 +65,6 @@ module.exports = (config) => {
             'src/**/!(*.d).ts': 'webpack',
             'test/unit/**/*.js': 'webpack'
         },
-
-        singleRun: true,
 
         webpack: {
             mode: 'development',
