@@ -26,17 +26,13 @@ describe('module', () => {
             let channelData;
             let sampleRate;
 
-            beforeEach(function (done) {
+            beforeEach(async function () {
                 this.timeout(30000);
 
-                loadFixtureAsPreparedAudioBuffer(filename, (err, audioBuffer) => {
-                    expect(err).to.be.null;
+                const audioBuffer = await loadFixtureAsPreparedAudioBuffer(filename);
 
-                    channelData = audioBuffer.getChannelData(0);
-                    sampleRate = audioBuffer.sampleRate;
-
-                    done();
-                });
+                channelData = audioBuffer.getChannelData(0);
+                sampleRate = audioBuffer.sampleRate;
             });
 
             it('should analyze the tempo from the given channelData', function (done) {
@@ -71,17 +67,13 @@ describe('module', () => {
             let channelData;
             let sampleRate;
 
-            beforeEach(function (done) {
+            beforeEach(async function () {
                 this.timeout(30000);
 
-                loadFixtureAsPreparedAudioBuffer('tombo-piano.wav', (err, audioBuffer) => {
-                    expect(err).to.be.null;
+                const audioBuffer = await loadFixtureAsPreparedAudioBuffer('tombo-piano.wav');
 
-                    channelData = audioBuffer.getChannelData(0);
-                    sampleRate = audioBuffer.sampleRate;
-
-                    done();
-                });
+                channelData = audioBuffer.getChannelData(0);
+                sampleRate = audioBuffer.sampleRate;
             });
 
             it('should return an error', function (done) {
@@ -128,17 +120,13 @@ describe('module', () => {
             let channelData;
             let sampleRate;
 
-            beforeEach(function (done) {
+            beforeEach(async function () {
                 this.timeout(30000);
 
-                loadFixtureAsPreparedAudioBuffer(filename, (err, audioBuffer) => {
-                    expect(err).to.be.null;
+                const audioBuffer = await loadFixtureAsPreparedAudioBuffer(filename);
 
-                    channelData = audioBuffer.getChannelData(0);
-                    sampleRate = audioBuffer.sampleRate;
-
-                    done();
-                });
+                channelData = audioBuffer.getChannelData(0);
+                sampleRate = audioBuffer.sampleRate;
             });
 
             it('should guess the bpm and the offset from the given channelData', function (done) {
@@ -173,17 +161,13 @@ describe('module', () => {
             let channelData;
             let sampleRate;
 
-            beforeEach(function (done) {
+            beforeEach(async function () {
                 this.timeout(30000);
 
-                loadFixtureAsPreparedAudioBuffer('tombo-piano.wav', (err, audioBuffer) => {
-                    expect(err).to.be.null;
+                const audioBuffer = await loadFixtureAsPreparedAudioBuffer('tombo-piano.wav');
 
-                    channelData = audioBuffer.getChannelData(0);
-                    sampleRate = audioBuffer.sampleRate;
-
-                    done();
-                });
+                channelData = audioBuffer.getChannelData(0);
+                sampleRate = audioBuffer.sampleRate;
             });
 
             it('should return an error', function (done) {
