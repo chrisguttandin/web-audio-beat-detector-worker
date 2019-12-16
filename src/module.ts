@@ -2,8 +2,12 @@ import { analyze } from './helpers/analyze';
 import { guess } from './helpers/guess';
 import { IAnalyzeResponse, IBrokerEvent, IErrorResponse, IGuessResponse } from './interfaces';
 
-export * from './interfaces';
-export * from './types';
+/*
+ * @todo Explicitly referencing the barrel file seems to be necessary when enabling the
+ * isolatedModules compiler option.
+ */
+export * from './interfaces/index';
+export * from './types/index';
 
 addEventListener('message', ({ data }: IBrokerEvent) => {
     try {
