@@ -1,9 +1,7 @@
 const { env } = require('process');
 
 module.exports = (config) => {
-
     config.set({
-
         basePath: '../../',
 
         browserNoActivityTimeout: 50000,
@@ -12,21 +10,14 @@ module.exports = (config) => {
             mochaWebWorker: {
                 evaluate: {
                     // This is basically a part of the functionality which karma-sinon-chai would provide in a Window.
-                    beforeRun : `(function(self) {
+                    beforeRun: `(function(self) {
                         self.should = null;
                         self.should = self.chai.should();
                         self.expect = self.chai.expect;
                         self.assert = self.chai.assert;
                     })(self);`
                 },
-                pattern: [
-                    '**/chai/**',
-                    '**/leche/**',
-                    '**/lolex/**',
-                    '**/sinon/**',
-                    '**/sinon-chai/**',
-                    'test/unit/**/*.js'
-                ]
+                pattern: ['**/chai/**', '**/leche/**', '**/lolex/**', '**/sinon/**', '**/sinon-chai/**', 'test/unit/**/*.js']
             }
         },
 
@@ -51,14 +42,10 @@ module.exports = (config) => {
             }
         ],
 
-        frameworks: [
-            'leche',
-            'mocha-webworker',
-            'sinon-chai'
-        ],
+        frameworks: ['leche', 'mocha-webworker', 'sinon-chai'],
 
         mime: {
-            'text/x-typescript': [ 'ts', 'tsx' ]
+            'text/x-typescript': ['ts', 'tsx']
         },
 
         preprocessors: {
@@ -69,33 +56,28 @@ module.exports = (config) => {
         webpack: {
             mode: 'development',
             module: {
-                rules: [ {
-                    test: /\.ts?$/,
-                    use: {
-                        loader: 'ts-loader'
+                rules: [
+                    {
+                        test: /\.ts?$/,
+                        use: {
+                            loader: 'ts-loader'
+                        }
                     }
-                } ]
+                ]
             },
             resolve: {
-                extensions: [ '.js', '.ts' ]
+                extensions: ['.js', '.ts']
             }
         },
 
         webpackMiddleware: {
             noInfo: true
         }
-
     });
 
     if (env.TRAVIS) {
-
         config.set({
-
-            browsers: [
-                'ChromeSauceLabs',
-                'FirefoxSauceLabs',
-                'SafariSauceLabs'
-            ],
+            browsers: ['ChromeSauceLabs', 'FirefoxSauceLabs', 'SafariSauceLabs'],
 
             captureTimeout: 120000,
 
@@ -118,25 +100,12 @@ module.exports = (config) => {
             },
 
             tunnelIdentifier: env.TRAVIS_JOB_NUMBER
-
         });
-
     } else {
-
         config.set({
-
-            browsers: [
-                'ChromeHeadless',
-                'ChromeCanaryHeadless',
-                'FirefoxHeadless',
-                'FirefoxDeveloperHeadless',
-                'Safari'
-            ],
+            browsers: ['ChromeHeadless', 'ChromeCanaryHeadless', 'FirefoxHeadless', 'FirefoxDeveloperHeadless', 'Safari'],
 
             concurrency: 2
-
         });
-
     }
-
 };

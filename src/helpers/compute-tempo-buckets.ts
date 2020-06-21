@@ -11,7 +11,7 @@ export const computeTempoBuckets = (channelData: Float32Array, sampleRate: numbe
     const minimumThreshold = maximumValue * 0.3;
 
     let peaks: number[] = [];
-    let threshold = maximumValue - (maximumValue * 0.05);
+    let threshold = maximumValue - maximumValue * 0.05;
 
     if (maximumValue > 0.25) {
         while (peaks.length < MINUMUM_NUMBER_OF_PEAKS && threshold >= minimumThreshold) {

@@ -13,7 +13,7 @@ export const guess = (channelData: Float32Array, sampleRate: number) => {
 
     peaks.sort((a, b) => a - b);
 
-    let offset = (peaks[0] / sampleRate);
+    let offset = peaks[0] / sampleRate;
 
     while (offset > secondsPerBeat) {
         offset -= secondsPerBeat;

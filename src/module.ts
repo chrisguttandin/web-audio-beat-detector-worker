@@ -12,30 +12,36 @@ export * from './types/index';
 addEventListener('message', ({ data }: IBrokerEvent) => {
     try {
         if (data.method === 'analyze') {
-            const { id, params: { channelData, sampleRate } } = data;
+            const {
+                id,
+                params: { channelData, sampleRate }
+            } = data;
 
             const tempo = analyze(channelData, sampleRate);
 
-            postMessage(<IAnalyzeResponse> {
+            postMessage(<IAnalyzeResponse>{
                 error: null,
                 id,
                 result: { tempo }
             });
         } else if (data.method === 'guess') {
-            const { id, params: { channelData, sampleRate } } = data;
+            const {
+                id,
+                params: { channelData, sampleRate }
+            } = data;
 
             const { bpm, offset } = guess(channelData, sampleRate);
 
-            postMessage(<IGuessResponse> {
+            postMessage(<IGuessResponse>{
                 error: null,
                 id,
                 result: { bpm, offset }
             });
         } else {
-           throw new Error(`The given method "${ (<any> data).method }" is not supported`);
+            throw new Error(`The given method "${(<any>data).method}" is not supported`);
         }
     } catch (err) {
-        postMessage(<IErrorResponse> {
+        postMessage(<IErrorResponse>{
             error: {
                 message: err.message
             },

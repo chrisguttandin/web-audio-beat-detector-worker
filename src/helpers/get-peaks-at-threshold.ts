@@ -12,7 +12,7 @@ export const getPeaksAtThreshold = (channelData: Float32Array, threshold: number
             peaks.push(i - 1);
 
             // Skip 0.25 seconds forward to get past this peak.
-            i += (sampleRate / 4) - 1;
+            i += sampleRate / 4 - 1;
         }
     }
 

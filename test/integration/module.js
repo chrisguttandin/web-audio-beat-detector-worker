@@ -3,7 +3,6 @@ import { loadFixtureAsPreparedAudioBuffer } from '../helper/load-fixture';
 import tempoData from '../fixtures/tempo-data.json';
 
 describe('module', () => {
-
     let id;
     let worker;
 
@@ -14,7 +13,6 @@ describe('module', () => {
     });
 
     describe('analyze', () => {
-
         let method;
 
         beforeEach(() => {
@@ -22,7 +20,6 @@ describe('module', () => {
         });
 
         leche.withData(tempoData, (filename, tempo) => {
-
             let channelData;
             let sampleRate;
 
@@ -48,22 +45,21 @@ describe('module', () => {
                     done();
                 });
 
-                worker.postMessage({
-                    id,
-                    method,
-                    params: {
-                        channelData,
-                        sampleRate
-                    }
-                }, [
-                    channelData.buffer
-                ]);
+                worker.postMessage(
+                    {
+                        id,
+                        method,
+                        params: {
+                            channelData,
+                            sampleRate
+                        }
+                    },
+                    [channelData.buffer]
+                );
             });
-
         });
 
         describe('with a file without detectable beats', () => {
-
             let channelData;
             let sampleRate;
 
@@ -91,24 +87,22 @@ describe('module', () => {
                     done();
                 });
 
-                worker.postMessage({
-                    id,
-                    method,
-                    params: {
-                        channelData,
-                        sampleRate
-                    }
-                }, [
-                    channelData.buffer
-                ]);
+                worker.postMessage(
+                    {
+                        id,
+                        method,
+                        params: {
+                            channelData,
+                            sampleRate
+                        }
+                    },
+                    [channelData.buffer]
+                );
             });
-
         });
-
     });
 
     describe('guess', () => {
-
         let method;
 
         beforeEach(() => {
@@ -116,7 +110,6 @@ describe('module', () => {
         });
 
         leche.withData(bpmOffsetData, (filename, bpm, offset) => {
-
             let channelData;
             let sampleRate;
 
@@ -142,22 +135,21 @@ describe('module', () => {
                     done();
                 });
 
-                worker.postMessage({
-                    id,
-                    method,
-                    params: {
-                        channelData,
-                        sampleRate
-                    }
-                }, [
-                    channelData.buffer
-                ]);
+                worker.postMessage(
+                    {
+                        id,
+                        method,
+                        params: {
+                            channelData,
+                            sampleRate
+                        }
+                    },
+                    [channelData.buffer]
+                );
             });
-
         });
 
         describe('with a file without detectable beats', () => {
-
             let channelData;
             let sampleRate;
 
@@ -185,20 +177,18 @@ describe('module', () => {
                     done();
                 });
 
-                worker.postMessage({
-                    id,
-                    method,
-                    params: {
-                        channelData,
-                        sampleRate
-                    }
-                }, [
-                    channelData.buffer
-                ]);
+                worker.postMessage(
+                    {
+                        id,
+                        method,
+                        params: {
+                            channelData,
+                            sampleRate
+                        }
+                    },
+                    [channelData.buffer]
+                );
             });
-
         });
-
     });
-
 });
