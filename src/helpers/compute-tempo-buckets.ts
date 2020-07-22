@@ -1,4 +1,4 @@
-import { ITempoBucket } from '../interfaces';
+import { ITempoBucket, ITempoSettings } from '../interfaces';
 import { countIntervalsBetweenNearbyPeaks } from './count-intervals-between-nearby-peaks';
 import { getMaximumValue } from './get-maximum-value';
 import { getPeaksAtThreshold } from './get-peaks-at-threshold';
@@ -6,7 +6,7 @@ import { groupNeighborsByTempo } from './group-neighbors-by-tempo';
 
 const MINUMUM_NUMBER_OF_PEAKS = 30;
 
-export const computeTempoBuckets = (channelData: Float32Array, sampleRate: number, minTempo = 90, maxTempo = 180): ITempoBucket[] => {
+export const computeTempoBuckets = (channelData: Float32Array, sampleRate: number, tempoSettings?: ITempoSettings): ITempoBucket[] => {
     const maximumValue = getMaximumValue(channelData);
     const minimumThreshold = maximumValue * 0.3;
 
@@ -21,7 +21,7 @@ export const computeTempoBuckets = (channelData: Float32Array, sampleRate: numbe
     }
 
     const intervalBuckets = countIntervalsBetweenNearbyPeaks(peaks);
-    const tempoBuckets = groupNeighborsByTempo(intervalBuckets, sampleRate, minTempo, maxTempo);
+    const tempoBuckets = groupNeighborsByTempo(intervalBuckets, sampleRate, tempoSettings);
 
     tempoBuckets.sort((a, b) => b.score - a.score);
 

@@ -14,10 +14,10 @@ addEventListener('message', ({ data }: IBrokerEvent) => {
         if (data.method === 'analyze') {
             const {
                 id,
-                params: { channelData, sampleRate, minTempo, maxTempo }
+                params: { channelData, sampleRate, tempoSettings }
             } = data;
 
-            const tempo = analyze(channelData, sampleRate, minTempo, maxTempo);
+            const tempo = analyze(channelData, sampleRate, tempoSettings);
 
             postMessage(<IAnalyzeResponse>{
                 error: null,
@@ -27,10 +27,10 @@ addEventListener('message', ({ data }: IBrokerEvent) => {
         } else if (data.method === 'guess') {
             const {
                 id,
-                params: { channelData, sampleRate, minTempo, maxTempo }
+                params: { channelData, sampleRate, tempoSettings }
             } = data;
 
-            const { bpm, offset } = guess(channelData, sampleRate, minTempo, maxTempo);
+            const { bpm, offset } = guess(channelData, sampleRate, tempoSettings);
 
             postMessage(<IGuessResponse>{
                 error: null,
