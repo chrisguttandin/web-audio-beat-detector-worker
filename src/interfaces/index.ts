@@ -6,4 +6,5 @@ export * from './guess-response';
 export * from './error-response';
 export * from './interval-bucket';
 export * from './tempo-bucket';
+export * from './tempo-settings';
 export * from './worker-event';

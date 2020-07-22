@@ -1,3 +1,5 @@
+import { ITempoSettings } from './tempo-settings';
+
 export interface IAnalyzeRequest {
     id: number;
 
@@ -6,10 +8,8 @@ export interface IAnalyzeRequest {
     params: {
         channelData: Float32Array;
 
-        maxTempo?: number;
-
-        minTempo?: number;
-
         sampleRate: number;
+
+        tempoSettings?: ITempoSettings;
     };
 }

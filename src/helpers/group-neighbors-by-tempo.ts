@@ -1,7 +1,9 @@
-import { IIntervalBucket, ITempoBucket } from '../interfaces';
+import { IIntervalBucket, ITempoBucket, ITempoSettings } from '../interfaces';
 
-export const groupNeighborsByTempo = (intervalBuckets: IIntervalBucket[], sampleRate: number, minTempo = 90, maxTempo = 180) => {
+export const groupNeighborsByTempo = (intervalBuckets: IIntervalBucket[], sampleRate: number, tempoSettings: ITempoSettings = {}) => {
     const tempoBuckets: ITempoBucket[] = [];
+    const minTempo = typeof tempoSettings.minTempo === 'number' ? tempoSettings.minTempo : 90;
+    const maxTempo = typeof tempoSettings.maxTempo === 'number' ? tempoSettings.maxTempo : 180;
 
     intervalBuckets.forEach((intervalBucket) => {
         // Convert an interval to a tempo (aka BPM).

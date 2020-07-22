@@ -1,7 +1,8 @@
+import { ITempoSettings } from '../interfaces';
 import { computeTempoBuckets } from './compute-tempo-buckets';
 
-export const analyze = (channelData: Float32Array, sampleRate: number, minTempo = 90, maxTempo = 180) => {
-    const tempoBuckets = computeTempoBuckets(channelData, sampleRate, minTempo, maxTempo);
+export const analyze = (channelData: Float32Array, sampleRate: number, tempoSettings?: ITempoSettings) => {
+    const tempoBuckets = computeTempoBuckets(channelData, sampleRate, tempoSettings);
 
     if (tempoBuckets.length === 0) {
         throw new Error('The given channelData does not contain any detectable beats.');
