@@ -1,17 +1,17 @@
 import { IIntervalBucket, ITempoBucket } from '../interfaces';
 
-export const groupNeighborsByTempo = (intervalBuckets: IIntervalBucket[], sampleRate: number) => {
+export const groupNeighborsByTempo = (intervalBuckets: IIntervalBucket[], sampleRate: number, minTempo = 90, maxTempo = 180) => {
     const tempoBuckets: ITempoBucket[] = [];
 
     intervalBuckets.forEach((intervalBucket) => {
         // Convert an interval to a tempo (aka BPM).
         let theoreticalTempo = 60 / (intervalBucket.interval / sampleRate);
 
-        // Adjust the tempo to fit within the 90-180 BPM range.
-        while (theoreticalTempo < 90) {
+        // Adjust the tempo to fit within the min-max (90-180) BPM range.
+        while (theoreticalTempo < minTempo) {
             theoreticalTempo *= 2;
         }
-        while (theoreticalTempo > 180) {
+        while (theoreticalTempo > maxTempo) {
             theoreticalTempo /= 2;
         }
 

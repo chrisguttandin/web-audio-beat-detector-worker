@@ -6,6 +6,10 @@ export interface IAnalyzeRequest {
     params: {
         channelData: Float32Array;
 
+        maxTempo?: number;
+
+        minTempo?: number;
+
         sampleRate: number;
     };
 }

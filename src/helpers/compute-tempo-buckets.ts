@@ -6,7 +6,7 @@ import { groupNeighborsByTempo } from './group-neighbors-by-tempo';
 
 const MINUMUM_NUMBER_OF_PEAKS = 30;
 
-export const computeTempoBuckets = (channelData: Float32Array, sampleRate: number): ITempoBucket[] => {
+export const computeTempoBuckets = (channelData: Float32Array, sampleRate: number, minTempo = 90, maxTempo = 180): ITempoBucket[] => {
     const maximumValue = getMaximumValue(channelData);
     const minimumThreshold = maximumValue * 0.3;
 
@@ -21,7 +21,7 @@ export const computeTempoBuckets = (channelData: Float32Array, sampleRate: numbe
     }
 
     const intervalBuckets = countIntervalsBetweenNearbyPeaks(peaks);
-    const tempoBuckets = groupNeighborsByTempo(intervalBuckets, sampleRate);
+    const tempoBuckets = groupNeighborsByTempo(intervalBuckets, sampleRate, minTempo, maxTempo);
 
     tempoBuckets.sort((a, b) => b.score - a.score);
 
