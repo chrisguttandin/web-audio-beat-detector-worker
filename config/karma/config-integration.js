@@ -98,8 +98,8 @@ module.exports = (config) => {
                     base: 'BrowserStack',
                     browser: 'firefox',
                     captureTimeout: 300,
-                    os: 'OS X',
-                    os_version: 'Big Sur' // eslint-disable-line camelcase
+                    os: 'Windows',
+                    os_version: '10' // eslint-disable-line camelcase
                 },
                 SafariBrowserStack: {
                     base: 'BrowserStack',
