@@ -1,8 +1,8 @@
 import { IIntervalBucket, ITempoBucket, ITempoSettings } from '../interfaces';
 
 export const groupNeighborsByTempo = (intervalBuckets: IIntervalBucket[], sampleRate: number, tempoSettings: ITempoSettings = {}) => {
-    const minTempo = tempoSettings.minTempo ?? 90;
-    const maxTempo = tempoSettings.maxTempo ?? 180;
+    const minTempo = Math.max(0, tempoSettings.minTempo ?? 90);
+    const maxTempo = Math.max(0, tempoSettings.maxTempo ?? 180);
     const tempoBuckets: ITempoBucket[] = [];
 
     intervalBuckets.forEach((intervalBucket) => {
