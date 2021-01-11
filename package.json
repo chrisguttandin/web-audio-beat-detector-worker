@@ -49,7 +49,7 @@
         "rollup": "^2.36.1",
         "sinon": "^9.2.3",
         "sinon-chai": "^3.5.0",
-        "standardized-audio-context": "^25.1.6",
+        "standardized-audio-context": "^25.1.8",
         "ts-loader": "^8.0.13",
         "tsconfig-holy-grail": "^11.0.38",
         "tslint": "^6.1.3",
