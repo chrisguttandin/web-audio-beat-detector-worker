@@ -8,6 +8,12 @@
             "path": "cz-conventional-changelog"
         }
     },
+    "contributors": [
+        {
+            "email": "git@skratchdot.com",
+            "name": "skratchdot"
+        }
+    ],
     "dependencies": {
         "@babel/runtime": "^7.12.5",
         "tslib": "^2.1.0"
