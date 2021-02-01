@@ -7,5 +7,7 @@ export interface IGuessResponse {
         bpm: number;
 
         offset: number;
+
+        tempo: number;
     };
 }

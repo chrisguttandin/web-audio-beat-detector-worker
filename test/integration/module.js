@@ -109,7 +109,7 @@ describe('module', () => {
             method = 'guess';
         });
 
-        leche.withData(bpmOffsetData, (filename, bpm, offset) => {
+        leche.withData(bpmOffsetData, (filename, bpm, offset, tempo) => {
             let channelData;
             let sampleRate;
 
@@ -122,14 +122,14 @@ describe('module', () => {
                 sampleRate = audioBuffer.sampleRate;
             });
 
-            it('should guess the bpm and the offset from the given channelData', function (done) {
+            it('should guess the bpm, the offset and the tempo from the given channelData', function (done) {
                 this.timeout(30000);
 
                 worker.addEventListener('message', ({ data }) => {
                     expect(data).to.deep.equal({
                         error: null,
                         id,
-                        result: { bpm, offset }
+                        result: { bpm, offset, tempo }
                     });
 
                     done();
