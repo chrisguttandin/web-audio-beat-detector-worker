@@ -17,7 +17,17 @@ module.exports = (config) => {
                         self.expect = self.chai.expect;
                     })(self);`
                 },
-                pattern: ['**/chai/**', '**/leche/**', '**/lolex/**', '**/sinon/**', '**/sinon-chai/**', 'test/unit/**/*.js']
+                pattern: [
+                    '/absolute**',
+                    '/absolute/**',
+                    '**/chai/**',
+                    '**/leche/**',
+                    '**/lolex/**',
+                    '**/mocha/**',
+                    '**/sinon/**',
+                    '**/sinon-chai/**',
+                    'test/unit/**/*.js'
+                ]
             }
         },
 
@@ -44,7 +54,7 @@ module.exports = (config) => {
             }
         ],
 
-        frameworks: ['leche', 'mocha-webworker', 'sinon-chai'],
+        frameworks: ['leche', 'mocha-webworker', 'sinon-chai', 'webpack'],
 
         preprocessors: {
             'src/**/!(*.d).ts': 'webpack',
@@ -60,7 +70,13 @@ module.exports = (config) => {
                     {
                         test: /\.ts?$/,
                         use: {
-                            loader: 'ts-loader'
+                            loader: 'ts-loader',
+                            options: {
+                                compilerOptions: {
+                                    declaration: false,
+                                    declarationMap: false
+                                }
+                            }
                         }
                     }
                 ]
@@ -73,7 +89,8 @@ module.exports = (config) => {
                 })
             ],
             resolve: {
-                extensions: ['.js', '.ts']
+                extensions: ['.js', '.ts'],
+                fallback: { util: false }
             }
         },
 
