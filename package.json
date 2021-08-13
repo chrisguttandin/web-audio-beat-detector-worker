@@ -16,7 +16,7 @@
     ],
     "dependencies": {
         "@babel/runtime": "^7.15.3",
-        "tslib": "^2.3.0"
+        "tslib": "^2.3.1"
     },
     "description": "The worker which is used by the web-audio-beat-detector package.",
     "devDependencies": {
