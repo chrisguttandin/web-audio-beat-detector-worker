@@ -58,7 +58,7 @@ module.exports = (config) => {
             }
         ],
 
-        frameworks: ['leche', 'mocha-webworker', 'sinon-chai', 'webpack'],
+        frameworks: ['mocha-webworker', 'sinon-chai', 'webpack'],
 
         preprocessors: {
             'src/**/!(*.d).ts': 'webpack',
