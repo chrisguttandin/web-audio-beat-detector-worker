@@ -19,45 +19,47 @@ describe('module', () => {
             method = 'analyze';
         });
 
-        leche.withData(tempoData, (filename, tempo) => {
-            let channelData;
-            let sampleRate;
+        for (const [filename, tempo] of tempoData) {
+            describe('with a file with detectable beats', () => {
+                let channelData;
+                let sampleRate;
 
-            beforeEach(async function () {
-                this.timeout(30000);
+                beforeEach(async function () {
+                    this.timeout(30000);
 
-                const audioBuffer = await loadFixtureAsPreparedAudioBuffer(filename);
+                    const audioBuffer = await loadFixtureAsPreparedAudioBuffer(filename);
 
-                channelData = audioBuffer.getChannelData(0);
-                sampleRate = audioBuffer.sampleRate;
-            });
-
-            it('should analyze the tempo from the given channelData', function (done) {
-                this.timeout(30000);
-
-                worker.addEventListener('message', ({ data }) => {
-                    expect(data).to.deep.equal({
-                        error: null,
-                        id,
-                        result: { tempo }
-                    });
-
-                    done();
+                    channelData = audioBuffer.getChannelData(0);
+                    sampleRate = audioBuffer.sampleRate;
                 });
 
-                worker.postMessage(
-                    {
-                        id,
-                        method,
-                        params: {
-                            channelData,
-                            sampleRate
-                        }
-                    },
-                    [channelData.buffer]
-                );
+                it('should analyze the tempo from the given channelData', function (done) {
+                    this.timeout(30000);
+
+                    worker.addEventListener('message', ({ data }) => {
+                        expect(data).to.deep.equal({
+                            error: null,
+                            id,
+                            result: { tempo }
+                        });
+
+                        done();
+                    });
+
+                    worker.postMessage(
+                        {
+                            id,
+                            method,
+                            params: {
+                                channelData,
+                                sampleRate
+                            }
+                        },
+                        [channelData.buffer]
+                    );
+                });
             });
-        });
+        }
 
         describe('with a file without detectable beats', () => {
             let channelData;
@@ -109,45 +111,47 @@ describe('module', () => {
             method = 'guess';
         });
 
-        leche.withData(bpmOffsetData, (filename, bpm, offset, tempo) => {
-            let channelData;
-            let sampleRate;
+        for (const [filename, bpm, offset, tempo] of bpmOffsetData) {
+            describe('with a file with detectable beats', () => {
+                let channelData;
+                let sampleRate;
 
-            beforeEach(async function () {
-                this.timeout(30000);
+                beforeEach(async function () {
+                    this.timeout(30000);
 
-                const audioBuffer = await loadFixtureAsPreparedAudioBuffer(filename);
+                    const audioBuffer = await loadFixtureAsPreparedAudioBuffer(filename);
 
-                channelData = audioBuffer.getChannelData(0);
-                sampleRate = audioBuffer.sampleRate;
-            });
-
-            it('should guess the bpm, the offset and the tempo from the given channelData', function (done) {
-                this.timeout(30000);
-
-                worker.addEventListener('message', ({ data }) => {
-                    expect(data).to.deep.equal({
-                        error: null,
-                        id,
-                        result: { bpm, offset, tempo }
-                    });
-
-                    done();
+                    channelData = audioBuffer.getChannelData(0);
+                    sampleRate = audioBuffer.sampleRate;
                 });
 
-                worker.postMessage(
-                    {
-                        id,
-                        method,
-                        params: {
-                            channelData,
-                            sampleRate
-                        }
-                    },
-                    [channelData.buffer]
-                );
+                it('should guess the bpm, the offset and the tempo from the given channelData', function (done) {
+                    this.timeout(30000);
+
+                    worker.addEventListener('message', ({ data }) => {
+                        expect(data).to.deep.equal({
+                            error: null,
+                            id,
+                            result: { bpm, offset, tempo }
+                        });
+
+                        done();
+                    });
+
+                    worker.postMessage(
+                        {
+                            id,
+                            method,
+                            params: {
+                                channelData,
+                                sampleRate
+                            }
+                        },
+                        [channelData.buffer]
+                    );
+                });
             });
-        });
+        }
 
         describe('with a file without detectable beats', () => {
             let channelData;
