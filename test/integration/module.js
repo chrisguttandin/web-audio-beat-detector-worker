@@ -19,7 +19,7 @@ describe('module', () => {
             method = 'analyze';
         });
 
-        for (const [filename, tempo] of tempoData) {
+        for (const [filename, params, tempo] of tempoData) {
             describe('with a file with detectable beats', () => {
                 let channelData;
                 let sampleRate;
@@ -52,7 +52,8 @@ describe('module', () => {
                             method,
                             params: {
                                 channelData,
-                                sampleRate
+                                sampleRate,
+                                ...params
                             }
                         },
                         [channelData.buffer]
@@ -111,7 +112,7 @@ describe('module', () => {
             method = 'guess';
         });
 
-        for (const [filename, bpm, offset, tempo] of bpmOffsetData) {
+        for (const [filename, params, bpm, offset, tempo] of bpmOffsetData) {
             describe('with a file with detectable beats', () => {
                 let channelData;
                 let sampleRate;
@@ -144,7 +145,8 @@ describe('module', () => {
                             method,
                             params: {
                                 channelData,
-                                sampleRate
+                                sampleRate,
+                                ...params
                             }
                         },
                         [channelData.buffer]

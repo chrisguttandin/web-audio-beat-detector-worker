@@ -1,4 +1,28 @@
 [
-    ["alex-umstaetter-comee-0007-mocca-remix.wav", 130, 0.21255712541426797, 129.59788411617768],
-    ["alex-umstaetter-light-04.wav", 122, 0.49072227798223067, 121.99943518780006]
+    ["alex-umstaetter-comee-0007-mocca-remix.wav", null, 130, 0.21255712541426797, 129.59788411617768],
+    [
+        "alex-umstaetter-comee-0007-mocca-remix.wav",
+        {
+            "tempoSettings": {
+                "maxTempo": 280,
+                "minTempo": 140
+            }
+        },
+        259,
+        0.20364711650425968,
+        259.19576823235536
+    ],
+    ["alex-umstaetter-light-04.wav", null, 122, 0.49072227798223067, 121.99943518780006],
+    [
+        "alex-umstaetter-light-04.wav",
+        {
+            "tempoSettings": {
+                "maxTempo": 280,
+                "minTempo": 140
+            }
+        },
+        244,
+        0.2448206386379682,
+        243.99887037560012
+    ]
 ]
