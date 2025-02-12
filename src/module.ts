@@ -12,7 +12,7 @@ export * from './types/index';
 
 createWorker<IWebAudioBeatDetectorWorkerCustomDefinition>(self, <TWorkerImplementation<IWebAudioBeatDetectorWorkerCustomDefinition>>{
     analyze: ({ channelData, sampleRate, tempoSettings }) => {
-        return { result: { tempo: analyze(channelData, sampleRate, tempoSettings) } };
+        return { result: analyze(channelData, sampleRate, tempoSettings) };
     },
     guess: ({ channelData, sampleRate, tempoSettings }) => {
         return { result: guess(channelData, sampleRate, tempoSettings) };

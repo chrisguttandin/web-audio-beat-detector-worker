@@ -12,9 +12,7 @@ export interface IWebAudioBeatDetectorWorkerCustomDefinition extends IWorkerDefi
         };
 
         response: {
-            result: {
-                tempo: number;
-            };
+            result: number;
         };
     };
 

@@ -39,7 +39,7 @@ describe('module', () => {
                     worker.addEventListener('message', ({ data }) => {
                         expect(data).to.deep.equal({
                             id,
-                            result: { tempo }
+                            result: tempo
                         });
 
                         done();
