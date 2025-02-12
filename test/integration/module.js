@@ -38,7 +38,6 @@ describe('module', () => {
 
                     worker.addEventListener('message', ({ data }) => {
                         expect(data).to.deep.equal({
-                            error: null,
                             id,
                             result: { tempo }
                         });
@@ -81,10 +80,10 @@ describe('module', () => {
                 worker.addEventListener('message', ({ data }) => {
                     expect(data).to.deep.equal({
                         error: {
+                            code: -32603,
                             message: 'The given channelData does not contain any detectable beats.'
                         },
-                        id,
-                        result: null
+                        id
                     });
 
                     done();
@@ -131,7 +130,6 @@ describe('module', () => {
 
                     worker.addEventListener('message', ({ data }) => {
                         expect(data).to.deep.equal({
-                            error: null,
                             id,
                             result: { bpm, offset, tempo }
                         });
@@ -174,10 +172,10 @@ describe('module', () => {
                 worker.addEventListener('message', ({ data }) => {
                     expect(data).to.deep.equal({
                         error: {
+                            code: -32603,
                             message: 'The given channelData does not contain any detectable beats.'
                         },
-                        id,
-                        result: null
+                        id
                     });
 
                     done();

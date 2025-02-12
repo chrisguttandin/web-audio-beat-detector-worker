@@ -1,6 +1,7 @@
+import { TWorkerImplementation, createWorker } from 'worker-factory';
 import { analyze } from './helpers/analyze';
 import { guess } from './helpers/guess';
-import { IAnalyzeResponse, IBrokerEvent, IErrorResponse, IGuessResponse } from './interfaces';
+import { IWebAudioBeatDetectorWorkerCustomDefinition } from './interfaces';
 
 /*
  * @todo Explicitly referencing the barrel file seems to be necessary when enabling the
@@ -9,44 +10,11 @@ import { IAnalyzeResponse, IBrokerEvent, IErrorResponse, IGuessResponse } from '
 export * from './interfaces/index';
 export * from './types/index';
 
-addEventListener('message', ({ data }: IBrokerEvent) => {
-    try {
-        if (data.method === 'analyze') {
-            const {
-                id,
-                params: { channelData, sampleRate, tempoSettings }
-            } = data;
-
-            const tempo = analyze(channelData, sampleRate, tempoSettings);
-
-            postMessage(<IAnalyzeResponse>{
-                error: null,
-                id,
-                result: { tempo }
-            });
-        } else if (data.method === 'guess') {
-            const {
-                id,
-                params: { channelData, sampleRate, tempoSettings }
-            } = data;
-
-            const { bpm, offset, tempo } = guess(channelData, sampleRate, tempoSettings);
-
-            postMessage(<IGuessResponse>{
-                error: null,
-                id,
-                result: { bpm, offset, tempo }
-            });
-        } else {
-            throw new Error(`The given method "${(<any>data).method}" is not supported`);
-        }
-    } catch (err) {
-        postMessage(<IErrorResponse>{
-            error: {
-                message: err.message
-            },
-            id: data.id,
-            result: null
-        });
+createWorker<IWebAudioBeatDetectorWorkerCustomDefinition>(self, <TWorkerImplementation<IWebAudioBeatDetectorWorkerCustomDefinition>>{
+    analyze: ({ channelData, sampleRate, tempoSettings }) => {
+        return { result: { tempo: analyze(channelData, sampleRate, tempoSettings) } };
+    },
+    guess: ({ channelData, sampleRate, tempoSettings }) => {
+        return { result: guess(channelData, sampleRate, tempoSettings) };
     }
 });

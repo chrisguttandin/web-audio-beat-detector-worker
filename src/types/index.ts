@@ -1,2 +1,1 @@
-export * from './broker-message';
-export * from './worker-message';
+export * from './web-audio-beat-detector-worker-definition';
