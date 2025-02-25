@@ -21,7 +21,7 @@
     },
     "description": "The worker which is used by the web-audio-beat-detector package.",
     "devDependencies": {
-        "@babel/core": "^7.26.8",
+        "@babel/core": "^7.26.9",
         "@babel/plugin-external-helpers": "^7.25.9",
         "@babel/plugin-transform-runtime": "^7.26.8",
         "@babel/preset-env": "^7.26.8",
