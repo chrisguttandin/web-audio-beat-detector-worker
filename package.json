@@ -46,7 +46,7 @@
         "karma-webpack": "^5.0.1",
         "lint-staged": "^16.2.7",
         "memory-fs": "^0.5.0",
-        "mocha": "^11.7.4",
+        "mocha": "^11.7.5",
         "prettier": "^3.6.2",
         "rimraf": "^6.1.0",
         "rollup": "^4.52.5",
