@@ -1,3 +1,4 @@
+import { describe, expect, it } from 'vitest';
 import { getPeaksAtThreshold } from '../../../src/helpers/get-peaks-at-threshold';
 
 describe('getPeaksAtThreshold()', () => {

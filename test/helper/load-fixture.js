@@ -3,7 +3,7 @@ import { OfflineAudioContext } from 'standardized-audio-context';
 const offlineAudioContext = new OfflineAudioContext(1, 1, 44100);
 
 export const loadFixtureAsPreparedAudioBuffer = (fixture) =>
-    fetch(`/base/test/fixtures/${fixture}`)
+    fetch(`/test/fixtures/${fixture}`)
         .then((response) => response.arrayBuffer())
         .then((arrayBuffer) => offlineAudioContext.decodeAudioData(arrayBuffer))
         .then((audioBuffer) => {

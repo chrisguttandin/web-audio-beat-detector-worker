@@ -1,3 +1,4 @@
+import { beforeEach, describe, expect, it } from 'vitest';
 import bpmOffsetData from '../fixtures/bpm-offset-data.json';
 import { loadFixtureAsPreparedAudioBuffer } from '../helper/load-fixture';
 import tempoData from '../fixtures/tempo-data.json';
@@ -9,7 +10,7 @@ describe('module', () => {
     beforeEach(() => {
         id = 63;
 
-        worker = new Worker('base/src/module.js');
+        worker = new Worker(new URL('../../src/module', import.meta.url), { type: 'module' });
     });
 
     describe('analyze', () => {
@@ -24,17 +25,15 @@ describe('module', () => {
                 let channelData;
                 let sampleRate;
 
-                beforeEach(async function () {
-                    this.timeout(30000);
-
+                beforeEach(async () => {
                     const audioBuffer = await loadFixtureAsPreparedAudioBuffer(filename);
 
                     channelData = audioBuffer.getChannelData(0);
                     sampleRate = audioBuffer.sampleRate;
                 });
 
-                it('should analyze the tempo from the given channelData', function (done) {
-                    this.timeout(30000);
+                it('should analyze the tempo from the given channelData', () => {
+                    const { promise, resolve } = Promise.withResolvers();
 
                     worker.addEventListener('message', ({ data }) => {
                         expect(data).to.deep.equal({
@@ -42,7 +41,7 @@ describe('module', () => {
                             result: tempo
                         });
 
-                        done();
+                        resolve();
                     });
 
                     worker.postMessage(
@@ -57,6 +56,8 @@ describe('module', () => {
                         },
                         [channelData.buffer]
                     );
+
+                    return promise;
                 });
             });
         }
@@ -65,17 +66,15 @@ describe('module', () => {
             let channelData;
             let sampleRate;
 
-            beforeEach(async function () {
-                this.timeout(30000);
-
+            beforeEach(async () => {
                 const audioBuffer = await loadFixtureAsPreparedAudioBuffer('tombo-piano.wav');
 
                 channelData = audioBuffer.getChannelData(0);
                 sampleRate = audioBuffer.sampleRate;
             });
 
-            it('should return an error', function (done) {
-                this.timeout(30000);
+            it('should return an error', () => {
+                const { promise, resolve } = Promise.withResolvers();
 
                 worker.addEventListener('message', ({ data }) => {
                     expect(data).to.deep.equal({
@@ -86,7 +85,7 @@ describe('module', () => {
                         id
                     });
 
-                    done();
+                    resolve();
                 });
 
                 worker.postMessage(
@@ -100,6 +99,8 @@ describe('module', () => {
                     },
                     [channelData.buffer]
                 );
+
+                return promise;
             });
         });
     });
@@ -116,17 +117,15 @@ describe('module', () => {
                 let channelData;
                 let sampleRate;
 
-                beforeEach(async function () {
-                    this.timeout(30000);
-
+                beforeEach(async () => {
                     const audioBuffer = await loadFixtureAsPreparedAudioBuffer(filename);
 
                     channelData = audioBuffer.getChannelData(0);
                     sampleRate = audioBuffer.sampleRate;
                 });
 
-                it('should guess the bpm, the offset and the tempo from the given channelData', function (done) {
-                    this.timeout(30000);
+                it('should guess the bpm, the offset and the tempo from the given channelData', () => {
+                    const { promise, resolve } = Promise.withResolvers();
 
                     worker.addEventListener('message', ({ data }) => {
                         expect(data).to.deep.equal({
@@ -134,7 +133,7 @@ describe('module', () => {
                             result: { bpm, offset, tempo }
                         });
 
-                        done();
+                        resolve();
                     });
 
                     worker.postMessage(
@@ -149,6 +148,8 @@ describe('module', () => {
                         },
                         [channelData.buffer]
                     );
+
+                    return promise;
                 });
             });
         }
@@ -157,17 +158,15 @@ describe('module', () => {
             let channelData;
             let sampleRate;
 
-            beforeEach(async function () {
-                this.timeout(30000);
-
+            beforeEach(async () => {
                 const audioBuffer = await loadFixtureAsPreparedAudioBuffer('tombo-piano.wav');
 
                 channelData = audioBuffer.getChannelData(0);
                 sampleRate = audioBuffer.sampleRate;
             });
 
-            it('should return an error', function (done) {
-                this.timeout(30000);
+            it('should return an error', () => {
+                const { promise, resolve } = Promise.withResolvers();
 
                 worker.addEventListener('message', ({ data }) => {
                     expect(data).to.deep.equal({
@@ -178,7 +177,7 @@ describe('module', () => {
                         id
                     });
 
-                    done();
+                    resolve();
                 });
 
                 worker.postMessage(
@@ -192,6 +191,8 @@ describe('module', () => {
                     },
                     [channelData.buffer]
                 );
+
+                return promise;
             });
         });
     });
